@@ -1,11 +1,11 @@
-from flask import Flask
-
+from flask import Flask,jsonify,request,render_template
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/Bodia', methods=['GET'])
 def hello_world():
-    return 'Hello Rabotyahy!'
+    test = request.args.get('test', '')
+    return "test = " + test
 
 
 if __name__ == '__main__':
