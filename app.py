@@ -1,12 +1,14 @@
 from flask import Flask
+from gevent.pywsgi import WSGIServer
+from markupsafe import escape
 
 app = Flask(__name__)
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello Rabotyahy!'
+@app.route('/ira/<test>')
+def show_user_profile(test):
+    return 'test =  %s' % escape(test)
 
 
-if __name__ == '__main__':
-    app.run()
+server_gevent = WSGIServer(('127.0.0.1', 3000), app)
+server_gevent.serve_forever()
