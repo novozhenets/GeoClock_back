@@ -19,9 +19,9 @@ def db_create():
     db.create_all()
 
 
-@app.route("/Bodia")
+@app.route("/Sonia")
 def Hello():
-    return "Hello world!"
+    return "Hello robotiadyyyy!"
 
 
 if __name__ == '__main__':
