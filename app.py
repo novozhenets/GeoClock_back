@@ -21,7 +21,7 @@ def db_create():
 
 @app.route("/Sonia")
 def Hello():
-    return "Hello robotiadyyyy!"
+    return "Hello robotiady!"
 
 
 if __name__ == '__main__':
