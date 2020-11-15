@@ -13,13 +13,12 @@ migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
-
 @manager.command
 def db_create():
     db.create_all()
 
 
-@app.route("/Bodia")
+@app.route("/Sonia")
 def Hello():
     return "Hello to everyone!"
 
