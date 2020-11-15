@@ -21,7 +21,7 @@ def db_create():
 
 @app.route("/Bodia")
 def Hello():
-    return "Hello world!"
+    return "Hello to everyone!"
 
 
 if __name__ == '__main__':
