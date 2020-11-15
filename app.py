@@ -1,3 +1,4 @@
+
 from flask import Flask, json, request
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
@@ -22,6 +23,7 @@ def db_create():
 @app.route("/start")
 def Hello():
     return "Hello to everyoneeee!"
+
 
 
 #link to try: http://127.0.0.1:5000/UserC?login=Buka&password=1111
