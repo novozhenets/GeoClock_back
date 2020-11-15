@@ -21,7 +21,7 @@ def db_create():
 
 @app.route("/start")
 def Hello():
-    return "Hello to everyoneeee!"
+    return "Hello to everyone!"
 
 
 
