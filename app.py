@@ -14,6 +14,10 @@ manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
 #tyt buv ja
+#<<<<<<< master
+#dubl 2.0
+#>>>>>>> master
+
 @manager.command
 def db_create():
     db.create_all()
