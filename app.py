@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, json
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
@@ -19,9 +19,27 @@ def db_create():
     db.create_all()
 
 
-@app.route("/Sonia")
+@app.route("/start")
 def Hello():
     return "Hello to everyoneeee!"
+
+
+class ModelUser(object):
+    def __init__(self, user_login=None, user_password=None):
+        self.user_login = user_login
+        self.user_password = user_password
+
+
+class ModelGeolocation(object):
+    def __init__(self, latitude=None, longitude=None, radius=None):
+        self.latitude = latitude
+        self.longitude = longitude
+        self.radius = radius
+
+
+class ModelNotification(object):
+    def __init__(self, notification=None):
+        self.notification = notification
 
 
 if __name__ == '__main__':
