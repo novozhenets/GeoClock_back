@@ -13,7 +13,6 @@ migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
-
 @manager.command
 def db_create():
     db.create_all()
@@ -55,6 +54,7 @@ class GeolocationController(object):
 class NotificationController(object):
     def __init__(self, model_notification):
         self.model_notification = model_notification
+
 
 
 if __name__ == '__main__':
