@@ -13,7 +13,7 @@ migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
-
+#tyt buv ja
 @manager.command
 def db_create():
     db.create_all()
