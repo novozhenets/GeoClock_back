@@ -42,5 +42,20 @@ class ModelNotification(object):
         self.notification = notification
 
 
+class UserController(object):
+    def __init__(self, model_user):
+        self.model_user = model_user
+
+
+class GeolocationController(object):
+    def __init__(self, model_geolocation):
+        self.model_geolocation = model_geolocation
+
+
+class NotificationController(object):
+    def __init__(self, model_notification):
+        self.model_notification = model_notification
+
+
 if __name__ == '__main__':
     manager.run()
