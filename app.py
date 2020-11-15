@@ -1,14 +1,27 @@
 from flask import Flask
-from gevent.pywsgi import WSGIServer
-from markupsafe import escape
+from flask_script import Manager
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate, MigrateCommand
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+migrate = Migrate(app, db)
+
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
+
+@manager.command
+def db_create():
+    db.create_all()
 
 
-@app.route('/ira/<test>')
-def show_user_profile(test):
-    return 'test =  %s' % escape(test)
+@app.route("/Sonia")
+def Hello():
+    return "Hello to everyone!"
 
 
-server_gevent = WSGIServer(('127.0.0.1', 3000), app)
-server_gevent.serve_forever()
+if __name__ == '__main__':
+    manager.run()
