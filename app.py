@@ -23,22 +23,19 @@ def Hello():
     return "Hello to everyoneeee!"
 
 
-class ModelUser(object):
-    def __init__(self, user_login=None, user_password=None):
-        self.user_login = user_login
-        self.user_password = user_password
+class User(db.Model):
+    user_login = db.Column(db.String(50), primary_key=True)
+    user_password = db.Column(db.String(50), primary_key=True)
 
 
-class ModelGeolocation(object):
-    def __init__(self, latitude=None, longitude=None, radius=None):
-        self.latitude = latitude
-        self.longitude = longitude
-        self.radius = radius
+class Geolocation(db.Model):
+    latitude = db.Column(db.Float, primary_key=True)
+    longitude = db.Column(db.Float, primary_key=True)
+    radius = db.Column(db.Integer, primary_key=True)
 
 
-class ModelNotification(object):
-    def __init__(self, notification=None):
-        self.notification = notification
+class Notification(db.Model):
+    notification = db.Column(db.String(200), primary_key=True)
 
 
 class UserController(object):
@@ -54,7 +51,6 @@ class GeolocationController(object):
 class NotificationController(object):
     def __init__(self, model_notification):
         self.model_notification = model_notification
-
 
 
 if __name__ == '__main__':
