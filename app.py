@@ -3,17 +3,6 @@ from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 
-# from models.GeolocationModel import Geolocation
-# from models.NotificationModel import Notification
-# from models.UserModell import User
-
-
-""""
-from controllers.GeolocationController import GeolocationController
-from controllers.NotificationController import NotificationController
-from controllers.UserController import UserController
-"""
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -74,36 +63,57 @@ def hello_not():
         return "Create failed!"
 
 
-"""
-class ModelUser(object):
+class ModelUser(db.Model):
+    user_login = db.Column(db.String(50), primary_key=True)
+    user_password = db.Column(db.String(50), primary_key=True)
 
     def __init__(self, user_login=None, user_password=None):
         self.user_login = user_login
         self.user_password = user_password
 
+    def add_users_to_db(self, user_login, user_password):
+        data = ModelUser(self, user_login, user_password)
+        db.session.add(data)
+        db.session.commit()
 
-class ModelGeolocation(object):
+
+class ModelGeolocation(db.Model):
+    latitude = db.Column(db.Float, primary_key=True)
+    longitude = db.Column(db.Float, primary_key=True)
+    radius = db.Column(db.Integer, primary_key=True)
 
     def __init__(self, latitude=None, longitude=None, radius=None):
         self.latitude = latitude
         self.longitude = longitude
         self.radius = radius
 
+    def add_users_to_db(self, latitude, longitude, radius):
+        data = ModelUser(self, latitude, longitude, radius)
+        db.session.add(data)
+        db.session.commit()
 
-class ModelNotification(object):
+
+class ModelNotification(db.Model):
+    notification = db.Column(db.String(200), primary_key=True)
 
     def __init__(self, notification=None):
         self.notification = notification
-"""
+
+    def add_users_to_db(self, notification):
+        data = ModelUser(self, notification)
+        db.session.add(data)
+        db.session.commit()
 
 
 class UserController(object):
-    def __init__(self, model_user=User()):  # було ...=modeluser()
+
+    def __init__(self, model_user=ModelUser()):  # було ...=modeluser()
         self.model_user = model_user
 
     def create(self, user_data=None):
         self.model_user.user_login = user_data.get('login')
         self.model_user.user_password = user_data.get('password')
+        # self.model_user.add_users_to_db(self.model_user.user_login, self.model_user.user_password)
         if self.model_user.user_login != None and self.model_user.user_password != None:
             return 1
         else:
@@ -111,7 +121,7 @@ class UserController(object):
 
 
 class GeolocationController(object):
-    def __init__(self, model_geolocation=Geolocation()):
+    def __init__(self, model_geolocation=ModelGeolocation()):
         self.model_geolocation = model_geolocation
 
     def create(self, geo_data=None):
@@ -125,7 +135,7 @@ class GeolocationController(object):
 
 
 class NotificationController(object):
-    def __init__(self, model_notification=Notification()):
+    def __init__(self, model_notification=ModelNotification()):
         self.model_notification = model_notification
 
     def create(self, not_data=None):
