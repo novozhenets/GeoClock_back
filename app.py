@@ -64,8 +64,9 @@ def hello_not():
 
 
 class ModelUser(db.Model):
-    user_login = db.Column(db.String(50), primary_key=True)
-    user_password = db.Column(db.String(50), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    user_login = db.Column(db.String(50), unique=True, nullable=False)
+    user_password = db.Column(db.String(50), unique=True, nullable=False)
 
     def __init__(self, user_login=None, user_password=None):
         self.user_login = user_login
@@ -78,9 +79,10 @@ class ModelUser(db.Model):
 
 
 class ModelGeolocation(db.Model):
-    latitude = db.Column(db.Float, primary_key=True)
-    longitude = db.Column(db.Float, primary_key=True)
-    radius = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    latitude = db.Column(db.Float, unique=True, nullable=False)
+    longitude = db.Column(db.Float, unique=True, nullable=False)
+    radius = db.Column(db.Integer, unique=True, nullable=False)
 
     def __init__(self, latitude=None, longitude=None, radius=None):
         self.latitude = latitude
@@ -94,7 +96,8 @@ class ModelGeolocation(db.Model):
 
 
 class ModelNotification(db.Model):
-    notification = db.Column(db.String(200), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    notification = db.Column(db.String(200), unique=True, nullable=False)
 
     def __init__(self, notification=None):
         self.notification = notification
