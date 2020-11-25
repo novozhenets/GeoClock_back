@@ -72,8 +72,13 @@ class ModelUser(db.Model):
         self.user_login = user_login
         self.user_password = user_password
 
-    def add_users_to_db(self, user_login, user_password):
+    """def add_users_to_db(self, user_login, user_password):
         data = ModelUser(self, user_login, user_password)
+        db.session.add(data)
+        db.session.commit()"""
+
+    def add_users_to_db(self):
+        data = ModelUser(self.user_login, self.user_password)
         db.session.add(data)
         db.session.commit()
 
@@ -116,7 +121,8 @@ class UserController(object):
     def create(self, user_data=None):
         self.model_user.user_login = user_data.get('login')
         self.model_user.user_password = user_data.get('password')
-        # self.model_user.add_users_to_db(self.model_user.user_login, self.model_user.user_password)
+        #self.model_user.add_users_to_db(self.model_user.user_login, self.model_user.user_password)
+        self.model_user.add_users_to_db()
         if self.model_user.user_login != None and self.model_user.user_password != None:
             return 1
         else:
